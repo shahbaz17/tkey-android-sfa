@@ -154,7 +154,7 @@ public class FirstFragment extends Fragment {
                                                 TorusKey torusKey = singleFactorAuth.getKey(loginParams, getActivity().getApplicationContext(), 86400).get();
                                                 String publicAddress = torusKey.getPublicAddress().toString();
                                                 Log.d(TAG, "Public Address = " + publicAddress);
-                                                String privateKey = torusKey.getPrivateKey().toString();
+                                                String privateKey = torusKey.getPrivateKey().toString(16);
                                                 Log.d(TAG, "Private Key = " + privateKey);
 
                                                 activity.runOnUiThread(() -> {
@@ -911,14 +911,7 @@ public class FirstFragment extends Fragment {
 
     private void renderError(Throwable error) {
         requireActivity().runOnUiThread(() -> {
-//            Throwable reason = Helpers.unwrapCompletionException(error);
             TextView textView = binding.resultView;
-//            if (reason instanceof UserCancelledException || reason instanceof NoAllowedBrowserFoundException) {
-//                textView.setText(error.getMessage());
-//            } else {
-//                String errorMessage = getResources().getString(R.string.error_message, error.getMessage());
-//                textView.setText(errorMessage);
-//            }
             String errorMessage = getResources().getString(R.string.error_message, error.getMessage());
             textView.setText(errorMessage);
         });
